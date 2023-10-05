@@ -8,6 +8,7 @@ public class UserUtil {
         throw new RuntimeException();
     }
 
+    //TODO choose the hash algorithm
     public static String hashPassword(@NonNull String password) {
         return password;
     }
