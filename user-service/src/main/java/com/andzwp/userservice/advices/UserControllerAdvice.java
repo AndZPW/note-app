@@ -16,11 +16,16 @@ public class UserControllerAdvice {
 
     @ExceptionHandler(NoSuchUserException.class)
     public ResponseEntity<ErrorResponse> handlerNoSuchUserException(@NonNull NoSuchUserException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(
-                HttpStatus.NOT_FOUND.toString(),
+        var statusCode = HttpStatus.NOT_FOUND;
+
+        var errorEntity = new ErrorResponse(
+                statusCode.toString(),
                 e.getMessage(),
                 Collections.singletonList(e.getMessage())
-        ));
+        );
+
+        return ResponseEntity.status(statusCode)
+                .body(errorEntity);
     }
 
 }
