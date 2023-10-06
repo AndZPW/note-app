@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        var userEntity = UserMapper.mapDTOToDAO(user);
-        return UserMapper.mapDAOToDTO(
+        var userEntity = UserMapper.convertUserToUserEntity(user);
+        return UserMapper.convertUserEntityToUser(
                 userRepository.save(userEntity)
         );
 
@@ -27,13 +27,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User fetchUserById(long id) throws NoSuchUserException {
         var userEntity = userRepository.findById(id);
-        return UserMapper.mapDAOToDTO(
+        return UserMapper.convertUserEntityToUser(
                 userEntity.orElseThrow(NoSuchUserException::new)
         );
     }
 
     @Override
-    public User fetchUserByEmail(String email) {
-        return null;
+    public User fetchUserByEmail(String email) throws NoSuchUserException {
+        var userEntity = userRepository.findUserByEmail(email);
+        return UserMapper.convertUserEntityToUser(
+                userEntity.orElseThrow(NoSuchUserException::new)
+        );
     }
 }

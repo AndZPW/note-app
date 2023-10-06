@@ -13,7 +13,7 @@ public class UserMapper {
         throw new RuntimeException();
     }
 
-    public static User mapDAOToDTO(@NonNull UserEntity userEntity) {
+    public static User convertUserEntityToUser(@NonNull UserEntity userEntity) {
 
         var roleEntity = userEntity.getRole();
 
@@ -27,7 +27,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserEntity mapDTOToDAO(@NonNull User user) {
+    public static UserEntity convertUserToUserEntity(@NonNull User user) {
 
         var role = user.role();
 
