@@ -1,4 +1,8 @@
 package com.andzwp.userservice.dto;
 
-public record ErrorResponse() {
+import java.util.List;
+
+public record ErrorResponse(String status, String message, List<String> errors) {
+
+
 }
