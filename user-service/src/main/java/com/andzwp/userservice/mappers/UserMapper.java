@@ -34,7 +34,7 @@ public class UserMapper {
         var roleEntity = new RoleEntity(role.id(), role.name());
 
         return UserEntity.builder()
-                .id(user.id())
+
                 .email(user.email())
                 .password(user.password())
                 .role(roleEntity)

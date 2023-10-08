@@ -2,9 +2,9 @@ package com.andzwp.userservice.utils;
 
 import lombok.NonNull;
 
-public class UserUtil {
+public class PasswordUtil {
 
-    private UserUtil() {
+    private PasswordUtil() {
         throw new RuntimeException();
     }
 
@@ -14,6 +14,6 @@ public class UserUtil {
     }
 
     public static boolean verifyPassword(@NonNull String password, @NonNull String hash) {
-        return hash.equals(UserUtil.hashPassword(password));
+        return hash.equals(PasswordUtil.hashPassword(password));
     }
 }
