@@ -6,6 +6,7 @@ import com.andzwp.userservice.dto.User;
 import com.andzwp.userservice.exceptions.NoSuchUserException;
 import com.andzwp.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,9 @@ import java.util.Collections;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
+    @Value("${test.prop}")
+    private String t;
+
     @Qualifier("default-service")
     private final UserService userService;
 
@@ -29,6 +33,11 @@ public class UserController {
     @GetMapping(params = {"id"})
     public User fetchUserById(@Param("id") long id) throws NoSuchUserException {
         return userService.fetchUserById(id);
+    }
+
+    @GetMapping
+    public String test(){
+        return t;
     }
 
 }
