@@ -15,9 +15,10 @@ import lombok.*;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
+
     @Column(name = "users_id",nullable = false)
-    private long id;
+    private int id;
 
     @Column(nullable = false)
     private String email;
@@ -27,7 +28,7 @@ public class UserEntity {
 
 
 
-    @JoinColumn( name = "role_id",nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn( name = "role_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private RoleEntity role;
 }

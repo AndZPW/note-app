@@ -7,6 +7,7 @@ import com.andzwp.userservice.exceptions.NoSuchUserException;
 import com.andzwp.userservice.mappers.UserMapper;
 import com.andzwp.userservice.repositories.UserRepository;
 import com.andzwp.userservice.utils.PasswordUtil;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service("default-service")
@@ -19,13 +20,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserRequest userRequest) {
+    public User save(@NonNull UserRequest userRequest) {
 
         var user = new User(
                 0,
                 userRequest.email(),
                 userRequest.password(),
-                new Role(1, "User")
+                new Role(1, "ROLE_USER")
 
         );
 
