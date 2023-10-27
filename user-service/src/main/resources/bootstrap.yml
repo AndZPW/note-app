@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8071
+      env: default
+      label: master
+  application:
+    name: user-service
+
+
+management.security.enabled: false
+server.port: 8081

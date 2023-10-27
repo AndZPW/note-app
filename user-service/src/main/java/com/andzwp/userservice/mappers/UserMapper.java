@@ -5,15 +5,14 @@ import com.andzwp.userservice.dao.UserEntity;
 import com.andzwp.userservice.dto.Role;
 import com.andzwp.userservice.dto.User;
 import lombok.NonNull;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class UserMapper {
 
-    private UserMapper() {
-        throw new RuntimeException();
-    }
 
-    public static User convertUserEntityToUser(@NonNull UserEntity userEntity) {
+
+    public User convertUserEntityToUser(@NonNull UserEntity userEntity) {
 
         var roleEntity = userEntity.getRole();
 
@@ -27,7 +26,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserEntity convertUserToUserEntity(@NonNull User user) {
+    public UserEntity convertUserToUserEntity(@NonNull User user) {
 
         var role = user.role();
 

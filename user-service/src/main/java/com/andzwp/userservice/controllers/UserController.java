@@ -19,13 +19,19 @@ import java.util.Collections;
 public class UserController {
 
 
+//    @Value("$test")
+//    private String test;
+
     @Qualifier("default-service")
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+//    @GetMapping("test")
+//    public String fetchU()  {
+//        return test;
+//    }
     @GetMapping(params = {"id"})
     public User fetchUserById(@Param("id") long id) throws NoSuchUserException {
         return userService.fetchUserById(id);

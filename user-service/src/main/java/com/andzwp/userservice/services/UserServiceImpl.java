@@ -15,8 +15,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private final PasswordUtil passwordUtil;
+
+    private final UserMapper userMapper;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordUtil passwordUtil, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.passwordUtil = passwordUtil;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -30,12 +36,12 @@ public class UserServiceImpl implements UserService {
 
         );
 
-        var userEntity = UserMapper.convertUserToUserEntity(user);
+        var userEntity = userMapper.convertUserToUserEntity(user);
         var password = userEntity.getPassword();
 
-        userEntity.setPassword(PasswordUtil.hashPassword(password));
+        userEntity.setPassword(passwordUtil.hashPassword(password));
 
-        return UserMapper.convertUserEntityToUser(
+        return userMapper.convertUserEntityToUser(
                 userRepository.save(userEntity)
         );
 
@@ -44,7 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User fetchUserById(long id) throws NoSuchUserException {
         var userEntity = userRepository.findById(id);
-        return UserMapper.convertUserEntityToUser(
+        return userMapper.convertUserEntityToUser(
                 userEntity.orElseThrow(NoSuchUserException::new)
         );
     }
@@ -52,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User fetchUserByEmail(String email) throws NoSuchUserException {
         var userEntity = userRepository.findUserByEmail(email);
-        return UserMapper.convertUserEntityToUser(
+        return userMapper.convertUserEntityToUser(
                 userEntity.orElseThrow(NoSuchUserException::new)
         );
     }

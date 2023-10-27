@@ -1,19 +1,19 @@
 package com.andzwp.userservice.utils;
 
 import lombok.NonNull;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PasswordUtil {
 
-    private PasswordUtil() {
-        throw new RuntimeException();
-    }
+
 
     //TODO choose the hash algorithm
-    public static String hashPassword(@NonNull String password) {
+    public String hashPassword(@NonNull String password) {
         return password;
     }
 
-    public static boolean verifyPassword(@NonNull String password, @NonNull String hash) {
-        return hash.equals(PasswordUtil.hashPassword(password));
+    public boolean verifyPassword(@NonNull String password, @NonNull String hash) {
+        return hash.equals(hashPassword(password));
     }
 }
