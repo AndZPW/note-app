@@ -1,16 +1,16 @@
 package com.andzwp.userservice.services;
 
-import com.andzwp.userservice.dto.User;
+import com.andzwp.userservice.dto.UserDTO;
 import com.andzwp.userservice.dto.UserRequest;
 import com.andzwp.userservice.exceptions.NoSuchUserException;
 
 public interface UserService {
 
-    User save(UserRequest userRequest );
+    UserDTO save(UserRequest userRequest );
 
-    User fetchUserById(long id) throws NoSuchUserException;
+    UserDTO fetchUserById(long id) throws NoSuchUserException;
 
-    User fetchUserByEmail(String email) throws NoSuchUserException;
+    UserDTO fetchUserByEmail(String email) throws NoSuchUserException;
 
 
 }

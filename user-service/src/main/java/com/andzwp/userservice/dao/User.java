@@ -12,7 +12,7 @@ import lombok.*;
 @Table(name = "users")
 @Builder
 
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -30,5 +30,5 @@ public class UserEntity {
 
     @JoinColumn( name = "role_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private RoleEntity role;
+    private Role role;
 }

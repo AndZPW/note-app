@@ -3,5 +3,5 @@ package com.andzwp.userservice.dto;
 import lombok.Builder;
 
 @Builder
-public record User(long id, String email, String password, Role role) {
+public record RoleDTO(int id, String name) {
 }

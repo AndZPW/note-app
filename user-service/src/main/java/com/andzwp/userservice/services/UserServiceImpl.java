@@ -1,7 +1,7 @@
 package com.andzwp.userservice.services;
 
-import com.andzwp.userservice.dto.Role;
-import com.andzwp.userservice.dto.User;
+import com.andzwp.userservice.dto.RoleDTO;
+import com.andzwp.userservice.dto.UserDTO;
 import com.andzwp.userservice.dto.UserRequest;
 import com.andzwp.userservice.exceptions.NoSuchUserException;
 import com.andzwp.userservice.mappers.UserMapper;
@@ -26,39 +26,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(@NonNull UserRequest userRequest) {
+    public UserDTO save(@NonNull UserRequest userRequest) {
 
-        var user = new User(
+        var user = new UserDTO(
                 0,
                 userRequest.email(),
                 userRequest.password(),
-                new Role(1, "ROLE_USER")
+                new RoleDTO(1, "ROLE_USER")
 
         );
 
-        var userEntity = userMapper.convertUserToUserEntity(user);
+        var userEntity = userMapper.convertUserDTOToUser(user);
         var password = userEntity.getPassword();
 
         userEntity.setPassword(passwordUtil.hashPassword(password));
 
-        return userMapper.convertUserEntityToUser(
+        return userMapper.convertUserToUserDTO(
                 userRepository.save(userEntity)
         );
 
     }
 
     @Override
-    public User fetchUserById(long id) throws NoSuchUserException {
+    public UserDTO fetchUserById(long id) throws NoSuchUserException {
         var userEntity = userRepository.findById(id);
-        return userMapper.convertUserEntityToUser(
+        return userMapper.convertUserToUserDTO(
                 userEntity.orElseThrow(NoSuchUserException::new)
         );
     }
 
     @Override
-    public User fetchUserByEmail(String email) throws NoSuchUserException {
+    public UserDTO fetchUserByEmail(String email) throws NoSuchUserException {
         var userEntity = userRepository.findUserByEmail(email);
-        return userMapper.convertUserEntityToUser(
+        return userMapper.convertUserToUserDTO(
                 userEntity.orElseThrow(NoSuchUserException::new)
         );
     }
