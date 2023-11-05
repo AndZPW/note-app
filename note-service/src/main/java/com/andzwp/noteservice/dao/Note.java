@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteEntity {
+public class Note {
 
     @Id
     @Column(name = "notes_id", nullable = false)
