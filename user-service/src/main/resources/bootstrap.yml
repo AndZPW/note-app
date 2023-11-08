@@ -1,9 +1,20 @@
+#spring:
+#  cloud:
+#    config:
+#      uri: http://localhost:8071
+#      env: default
+#      label: master
+
 spring:
-  cloud:
-    config:
-      uri: http://localhost:8071
-      env: default
-      label: master
+
+  config:
+    discovery:
+      enabled: true
+      service-id: CONFIG-SERVICE
+    #import: optional:configserver:http://localhost:8888
+    active:
+      on-profile: default
+
   application:
     name: user-service
 

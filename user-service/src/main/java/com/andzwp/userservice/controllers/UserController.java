@@ -27,13 +27,15 @@ public class UserController {
 //    public String fetchU()  {
 //        return test;
 //    }
-    @GetMapping(params = {"id"})
-    public UserDTO fetchUserById(@Param("id") long id) throws NoSuchUserException {
+    @GetMapping("/{id}")
+    public UserDTO fetchUserById(@PathVariable("id") long id) throws NoSuchUserException {
+        System.out.println("inside id");
         return userService.fetchUserById(id);
     }
 
-    @GetMapping(params = {"email"})
-    public UserDTO fetchUserById(@Param("email") String email) throws NoSuchUserException {
+    @GetMapping("/{email}")
+    public UserDTO fetchUserById(@PathVariable("email") String email) throws NoSuchUserException {
+        System.out.println("inside email");
         return userService.fetchUserByEmail(email);
     }
 
