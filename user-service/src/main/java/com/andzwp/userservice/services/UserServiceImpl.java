@@ -3,12 +3,14 @@ package com.andzwp.userservice.services;
 import com.andzwp.userservice.dto.RoleDTO;
 import com.andzwp.userservice.dto.UserDTO;
 import com.andzwp.userservice.dto.UserRequest;
-import com.andzwp.userservice.exceptions.NoSuchUserException;
+import com.andzwp.userservice.exceptions.NoSuchEntityException;
 import com.andzwp.userservice.mappers.UserMapper;
 import com.andzwp.userservice.repositories.UserRepository;
 import com.andzwp.userservice.utils.PasswordUtil;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("default-service")
 public class UserServiceImpl implements UserService {
@@ -48,18 +50,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO fetchUserById(long id) throws NoSuchUserException {
+    public UserDTO fetchUserById(long id) throws NoSuchEntityException {
         var userEntity = userRepository.findById(id);
         return userMapper.convertUserToUserDTO(
-                userEntity.orElseThrow(NoSuchUserException::new)
+                userEntity.orElseThrow(NoSuchEntityException::new)
         );
     }
 
     @Override
-    public UserDTO fetchUserByEmail(String email) throws NoSuchUserException {
+    public UserDTO fetchUserByEmail(String email) throws NoSuchEntityException {
         var userEntity = userRepository.findUserByEmail(email);
         return userMapper.convertUserToUserDTO(
-                userEntity.orElseThrow(NoSuchUserException::new)
+                userEntity.orElseThrow(NoSuchEntityException::new)
         );
+    }
+
+    @Override
+    public List<UserDTO> fetchAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::convertUserToUserDTO)
+                .toList();
+    }
+
+    @Override
+    public void deleteUserById(long id) throws NoSuchEntityException {
+        if (userRepository.findById(id).isEmpty()) throw new NoSuchEntityException();
+        else userRepository.deleteById(id);
     }
 }

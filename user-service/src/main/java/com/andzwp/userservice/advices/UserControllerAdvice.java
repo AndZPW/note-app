@@ -1,7 +1,7 @@
 package com.andzwp.userservice.advices;
 
 import com.andzwp.userservice.dto.ErrorResponse;
-import com.andzwp.userservice.exceptions.NoSuchUserException;
+import com.andzwp.userservice.exceptions.NoSuchEntityException;
 import lombok.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,8 @@ import java.util.Collections;
 @ControllerAdvice(annotations = RestController.class)
 public class UserControllerAdvice {
 
-    @ExceptionHandler(NoSuchUserException.class)
-    public ResponseEntity<ErrorResponse> handlerNoSuchUserException(@NonNull NoSuchUserException e) {
+    @ExceptionHandler(NoSuchEntityException.class)
+    public ResponseEntity<ErrorResponse> handlerNoSuchUserException(@NonNull NoSuchEntityException e) {
         var statusCode = HttpStatus.NOT_FOUND;
 
         var errorEntity = new ErrorResponse(
@@ -27,5 +27,7 @@ public class UserControllerAdvice {
         return ResponseEntity.status(statusCode)
                 .body(errorEntity);
     }
+
+
 
 }
