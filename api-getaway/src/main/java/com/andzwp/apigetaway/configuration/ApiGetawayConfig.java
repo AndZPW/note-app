@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class ApiGetawayConfig {
 
     @Bean
-    public RouteLocator myRoutes(RouteLocatorBuilder builder) {
-        return builder.routes()
+    public RouteLocator myRoutes(RouteLocatorBuilder builder) {return builder.routes()
 
                 .build();
     }

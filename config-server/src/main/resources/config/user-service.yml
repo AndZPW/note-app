@@ -4,17 +4,17 @@ spring:
     username: root
     password: 10082009
 
-server:
-  ssl:
-    key-store-type: PKCS12
-
-    key-store: classpath:certs3/node1.p12
-    key-store-password: abcd1234
-
-    trust-store: classpath:/certs3/node11.jks
-
-    trust-store-password: abcd1234
-
-    trust-store-type: JKS
-
-    client-auth: need
+#server:
+#  ssl:
+#    key-store-type: PKCS12
+#
+#    key-store: classpath:certs3/node1.p12
+#    key-store-password: abcd1234
+#
+#    trust-store: classpath:/certs3/node11.jks
+#
+#    trust-store-password: abcd1234
+#
+#    trust-store-type: JKS
+#
+#    client-auth: need
